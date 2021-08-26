@@ -40,24 +40,27 @@ if __name__ == "__main__":
 		render_message = font.render('The Icarus of Bluegrass', True, white) # by default rendered to the top-left of the screen
 		render_message_height = render_message.get_rect().height
 
-		print("DEBUG -- render_message.get_rect().height:", render_message.get_rect().height, ", DeltaY", deltaY)
+		while running and (screen_bottom + render_message_height + deltaY > 0):
 
-		# Now that we're running...
-		screen.fill(black) # fill the screen with black, obliterating everything
+			print("DEBUG -- render_message.get_rect().height:", render_message.get_rect().height, ", DeltaY", deltaY)
 
-		render_position = render_message.get_rect(center=(screen_centerX,
+			screen.fill(black) # fill the screen with black, obliterating everything
+
+			render_position = render_message.get_rect(center=(screen_centerX,
 		                                                  screen_bottom + deltaY))
-		if (screen_bottom + render_message_height + deltaY < 0): # if the text is going off the screen
-			deltaY = 0
+			#if (screen_bottom + render_message_height + deltaY < 0): # if the text is going off the screen
+			#	deltaY = 0
 
-		screen.blit(render_message, render_position)
+			screen.blit(render_message, render_position)
 
-		pygame.display.update()
+			pygame.display.update()
 
-		deltaY -= 1 # Decrement deltaY to create upward movement
+			deltaY -= 1 # Decrement deltaY to create upward movement
 
-		for event in pygame.event.get():
-			if event.type == QUIT: # If the window 'close' button is clicked...
-				running = False
+			for event in pygame.event.get():
+				if event.type == QUIT: # If the window 'close' button is clicked...
+					running = False
+
+		deltaY = 0
 
 	pygame.quit()
