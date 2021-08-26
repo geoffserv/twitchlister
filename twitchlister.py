@@ -31,14 +31,19 @@ deltaY = 0 # Track the Y offset as a textbox moves upwards
 
 running = True # Start off in a running state.  When untrue, the program ends.
 
-listFile = open("bandgenere.txt", "r")
+listFile = open("listlines.txt", "r") # listlines.txt contains the 'stock' list which plays in absense of chat input
 listLines = listFile.readlines()
+
+# listCrawler list will track the text and deltaY for two simultanous crawling lines of text
+# We'll put the first one in now, with the first line from the listlines.txt file with a deltaY of 0
+
+listCrawler = [ [listLines.pop(0), 0] ]
 
 if __name__ == "__main__":
 
 	while running and listLines: # we need to loop as long as there's text to show
 
-		listLine = listLines.pop(0).strip()
+		listLine = listLines.pop(0).strip() # pygame will not render control chars like newlines
 
 		font = pygame.font.SysFont('Courier', 50)
 
