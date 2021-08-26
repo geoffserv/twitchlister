@@ -31,13 +31,18 @@ deltaY = 0 # Track the Y offset as a textbox moves upwards
 
 running = True # Start off in a running state.  When untrue, the program ends.
 
+listFile = open("bandgenere.txt", "r")
+listLines = listFile.readlines()
+
 if __name__ == "__main__":
 
-	while running: # we need to loop as long as there's text to show
+	while running and listLines: # we need to loop as long as there's text to show
+
+		listLine = listLines.pop(0).strip()
 
 		font = pygame.font.SysFont('Courier', 50)
 
-		render_message = font.render('The Icarus of Bluegrass', True, white) # by default rendered to the top-left of the screen
+		render_message = font.render(listLine, True, white) # by default rendered to the top-left of the screen
 		render_message_height = render_message.get_rect().height
 
 		while running and (screen_bottom + render_message_height + deltaY > 0):
